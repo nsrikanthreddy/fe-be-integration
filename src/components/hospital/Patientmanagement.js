@@ -62,7 +62,7 @@ function PatientManagement() {
         //console.log(PATIENT_SERVICE_URL + `/${patients[index].id}`);
         //axios.delete(PATIENT_SERVICE_URL + `/${patients[index].id}`);
         console.log(patient_host + `/${patients[index].id}`);
-        axios.delete(patient_host + `/${patients[index].id}`);
+        axios.delete(patient_host + `/${patients[index].id}`)
             .then((response) => {
                 if (response.status === 200) {
                     alert("Patient deleted successfully");
