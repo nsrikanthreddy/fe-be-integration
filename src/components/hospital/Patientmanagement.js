@@ -5,8 +5,8 @@ function PatientManagement() {
     //const PATIENT_SERVICE_URL = "http://localhost:9091/api/patients";
     //const DOCTOR_SERVICE_URL = "http://localhost:9090/api/doctors";
     let hostName = window.location.hostname;
-    const patient_host = 'https://'+hostName.replace('3000','9091')+"/api/patients";
-    const doctor_host = 'https://'+hostName.replace('3000','9090')+"/api/doctors";
+    const patient_host = 'https://'+hostName.replace('9092','9091')+"/api/patients";
+    const doctor_host = 'https://'+hostName.replace('9092','9090')+"/api/doctors";
     const [showUpdate, setShowUpdate] = useState(false);
     const [patients, setPatients] = useState([]);
     const [id, setId] = useState("");
