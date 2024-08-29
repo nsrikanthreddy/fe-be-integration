@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function PatientManagement() {
-    const PATIENT_SERVICE_URL = "http://localhost:9091/api/patients";
-    const DOCTOR_SERVICE_URL = "http://localhost:9090/api/doctors";
+    //const PATIENT_SERVICE_URL = "http://localhost:9091/api/patients";
+    //const DOCTOR_SERVICE_URL = "http://localhost:9090/api/doctors";
+    let hostName = window.location.hostname;
+    const patient_host = 'https://'+hostName.replace('3000','9091')+"/api/patients";
+    const doctor_host = 'https://'+hostName.replace('3000','9090')+"/api/doctors";
     const [showUpdate, setShowUpdate] = useState(false);
     const [patients, setPatients] = useState([]);
     const [id, setId] = useState("");
@@ -19,7 +22,8 @@ function PatientManagement() {
     }, []);
 
     const fetchPatients = () => {
-        axios.get(PATIENT_SERVICE_URL)
+        //axios.get(PATIENT_SERVICE_URL)
+        axios.get(patient_host)
             .then((response) => {
                 if (response.status === 200) {
                     setPatients(response.data);
@@ -29,7 +33,8 @@ function PatientManagement() {
     }
 
     const fetchDoctors = () => {
-        axios.get(DOCTOR_SERVICE_URL)
+        //axios.get(DOCTOR_SERVICE_URL)
+        axios.get(doctor_host)
             .then((response) => {
                 if (response.status === 200) {
                     setDoctors(response.data);
@@ -54,8 +59,10 @@ function PatientManagement() {
 
     const handleDelete = (e, index) => {
         e.preventDefault();
-        console.log(PATIENT_SERVICE_URL + `/${patients[index].id}`);
-        axios.delete(PATIENT_SERVICE_URL + `/${patients[index].id}`)
+        //console.log(PATIENT_SERVICE_URL + `/${patients[index].id}`);
+        //axios.delete(PATIENT_SERVICE_URL + `/${patients[index].id}`);
+        console.log(patient_host + `/${patients[index].id}`);
+        axios.delete(patient_host + `/${patients[index].id}`);
             .then((response) => {
                 if (response.status === 200) {
                     alert("Patient deleted successfully");
@@ -76,7 +83,8 @@ function PatientManagement() {
             doctorId: doctorId
         });
         if (showUpdate) {
-            axios.put(PATIENT_SERVICE_URL + `/${id}`, {
+            //axios.put(PATIENT_SERVICE_URL + `/${id}`, {
+            axios.put(patient_host + `/${id}`, {
                 id: id,
                 name: name,
                 age: age,
@@ -91,7 +99,8 @@ function PatientManagement() {
                 })
                 .catch((error) => console.log("Error while updating patient", error));
         } else {
-            axios.post(PATIENT_SERVICE_URL, {
+            //axios.post(PATIENT_SERVICE_URL, {
+            axios.post(patient_host, {
                 id: id,
                 name: name,
                 age: age,
