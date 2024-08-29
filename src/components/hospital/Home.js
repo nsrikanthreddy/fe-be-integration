@@ -3,8 +3,11 @@ import axios from "axios";
 
 function Home() {
   const [showDoctors, setShowDoctors] = useState(true);
-  const PATIENT_SERVICE_URL = "http://localhost:9091/api/patients";
-  const DOCTOR_SERVICE_URL = "http://localhost:9090/api/doctors";
+  //const PATIENT_SERVICE_URL = "http://localhost:9091/api/patients";
+  //const DOCTOR_SERVICE_URL = "http://localhost:9090/api/doctors";
+  let hostName = window.location.hostname;
+  const patient_host = 'https://'+hostName.replace('3000','9091')+"/api/patients";
+  const doctor_host = 'https://'+hostName.replace('3000','9090')+"/api/doctors";
   const [patients, setPatients] = useState([]);
   const [doctors, setDoctors] = useState([]);
 
@@ -14,7 +17,8 @@ function Home() {
   }, []);
 
   const fetchPatients = () => {
-    axios.get(PATIENT_SERVICE_URL)
+    //axios.get(PATIENT_SERVICE_URL)
+    axios.get(patient_host)
       .then((response) => {
         if (response.status === 200) {
           setPatients(response.data);
@@ -24,7 +28,8 @@ function Home() {
   }
 
   const fetchDoctors = () => {
-    axios.get(DOCTOR_SERVICE_URL)
+    //axios.get(DOCTOR_SERVICE_URL)
+    axios.get(doctor_host)
       .then((response) => {
         if (response.status === 200) {
           setDoctors(response.data);
@@ -34,14 +39,15 @@ function Home() {
   }
 
   const searchByDoctorName = (name) => {
-    console.log(PATIENT_SERVICE_URL + `/doctor/${name}`);
-
+    //console.log(PATIENT_SERVICE_URL + `/doctor/${name}`);
+    console.log(patient_host + `/doctor/${name}`);
     if (name === "" || name === null || name === "undefined") {
       //setPatients([]);
       fetchPatients();
       return;
     }
-    axios.get(PATIENT_SERVICE_URL + `/doctor/${name}`)
+    //axios.get(PATIENT_SERVICE_URL + `/doctor/${name}`)
+    axios.get(patient_host + `/doctor/${name}`)
       .then((response) => {
         if (response.status === 200) {
           if (response.data.length > 0) {
@@ -57,14 +63,16 @@ function Home() {
   }
   
   const searchByPatientName = (name) => {
-    console.log(PATIENT_SERVICE_URL + `/searchByName/${name}`);
+    //console.log(PATIENT_SERVICE_URL + `/searchByName/${name}`);
+    console.log(patient_host + `/searchByName/${name}`);
 
     if (name === "" || name === null || name === "undefined") {
       //setPatients([]);
       fetchPatients();
       return;
     }
-    axios.get(PATIENT_SERVICE_URL + `/searchByName/${name}`)
+    //axios.get(PATIENT_SERVICE_URL + `/searchByName/${name}`)
+    axios.get(patient_host + `/searchByName/${name}`)
       .then((response) => {
         if (response.status === 200) {
           if (response.data.length > 0) {
@@ -81,13 +89,15 @@ function Home() {
 
   
   const searchByDoctorsName = (name) => {
-    console.log(DOCTOR_SERVICE_URL + "/searchByName");
+    //console.log(DOCTOR_SERVICE_URL + "/searchByName");
+    console.log(doctor_host + "/searchByName");
 
     if (name === "" || name === null || name === "undefined") {
       fetchDoctors();
       return;
     }
-    axios.get(DOCTOR_SERVICE_URL + "/searchByName?name="+name)
+    //axios.get(DOCTOR_SERVICE_URL + "/searchByName?name="+name)
+    axios.get(doctor_host + "/searchByName?name="+name)
       .then((response) => {
         if (response.status === 200) {
           if (response.data.length > 0) {
