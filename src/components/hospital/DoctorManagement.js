@@ -3,7 +3,9 @@ import axios from "axios";
 
 function DoctorManagement() {
 
-    const DOCTOR_SERVICE_URL = "http://localhost:9090/api/doctors";
+    //const DOCTOR_SERVICE_URL = "http://localhost:9090/api/doctors";
+    let hostName = window.location.hostname;
+    const doctor_host = 'https://'+hostName.replace('3000','9090')+"/api/doctors";
     const [showUpdate, setShowUpdate] = useState(false);
     const [doctors, setDoctors] = useState([]);
     const [id, setId] = useState("");
@@ -17,7 +19,8 @@ function DoctorManagement() {
     }, []);
 
     const fetchDoctors = () => {
-        axios.get(DOCTOR_SERVICE_URL)
+        //axios.get(DOCTOR_SERVICE_URL)
+        axios.get(doctor_host)
             .then((response) => {
                 if (response.status === 200) {
                     setDoctors(response.data);
@@ -42,8 +45,10 @@ function DoctorManagement() {
 
     const handleDelete = (e, index) => {
         e.preventDefault();
-        console.log(DOCTOR_SERVICE_URL + `/${doctors[index].id}`);
-        axios.delete(DOCTOR_SERVICE_URL + `/${doctors[index].id}`)
+        //console.log(DOCTOR_SERVICE_URL + `/${doctors[index].id}`);
+        //axios.delete(DOCTOR_SERVICE_URL + `/${doctors[index].id}`)
+        console.log(doctor_host + `/${doctors[index].id}`);
+        axios.delete(doctor_host + `/${doctors[index].id}`)
             .then((response) => {
                 if (response.status === 204) {
                     alert("Doctor deleted successfully");
@@ -64,7 +69,8 @@ function DoctorManagement() {
             contactPhone: contactPhone
         });
         if (showUpdate) {
-            axios.put(DOCTOR_SERVICE_URL + `/${id}`, {
+            //axios.put(DOCTOR_SERVICE_URL + `/${id}`, {
+            axios.put(doctor_host + `/${id}`, {
                 id: id,
                 name: name,
                 specialty: specialty,
@@ -79,7 +85,8 @@ function DoctorManagement() {
                 })
                 .catch((error) => console.log("Error while updating doctor", error));
         } else {
-            axios.post(DOCTOR_SERVICE_URL, {
+            //axios.post(DOCTOR_SERVICE_URL, {
+            axios.post(doctor_host, {
                 name: name,
                 specialty: specialty,
                 hospitalAffiliation: hospitalAffiliation,
