@@ -5,7 +5,7 @@ function DoctorManagement() {
 
     //const DOCTOR_SERVICE_URL = "http://localhost:9090/api/doctors";
     let hostName = window.location.hostname;
-    const doctor_host = 'https://'+hostName.replace('3000','9090')+"/api/doctors";
+    const doctor_host = 'https://'+hostName.replace('9092','9090')+"/api/doctors";
     const [showUpdate, setShowUpdate] = useState(false);
     const [doctors, setDoctors] = useState([]);
     const [id, setId] = useState("");
