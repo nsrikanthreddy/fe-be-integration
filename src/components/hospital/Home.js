@@ -7,8 +7,8 @@ function Home() {
   //const DOCTOR_SERVICE_URL = "http://localhost:9090/api/doctors";
   let hostName = window.location.hostname;
   let hostNameForDoctorService = window.location.hostname;
-  const patient_host = 'https://'+hostName.replace('3000','9091')+"/api/patients";
-  const doctor_host = 'https://'+hostNameForDoctorService.replace('3000','9090')+"/api/doctors";
+  const patient_host = 'https://'+hostName.replace('9092','9091')+"/api/patients";
+  const doctor_host = 'https://'+hostNameForDoctorService.replace('9092','9090')+"/api/doctors";
   const [patients, setPatients] = useState([]);
   const [doctors, setDoctors] = useState([]);
 
